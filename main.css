@@ -1,0 +1,8 @@
+
+/* main thoughts here: NOT setting up bootstrap? have to decide if committing to
+container/row/column format is best. thinking if the <canvas> is set centered,
+navigating "freely" within it shouldn't be an issue
+
+-Create "tracks" in html for icons(players) to move across ->bootstrap? good here
+-First step forward in the pseudo- YES to bootstrap.
+-
