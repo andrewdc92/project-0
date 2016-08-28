@@ -73,14 +73,32 @@ var BRAM_WIDTH = 72,
     }
 
     // this gets the right arrow firing in console
-    $(document).keyup(function(e) {
+    $(document).keydown(function(e) {
        if (e.which === 39) {
          console.log("Right key is pressed");
+         context.fillRect(0,0,stage.width,stage.height);
          BRAM_START_X = (BRAM_START_X + 10) // run that rectangle refresh function to keep the green from being refreshed
          context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
        }
-     });
-
+       else if (e.which === 40) {
+        //  console.log("down key is pressed");
+         context.fillRect(0,0,stage.width,stage.height);
+         BRAM_START_Y = (BRAM_START_Y + 10) // run that rectangle refresh function to keep the green from being refreshed
+         context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
+       }
+       else if (e.which === 37) {
+        //  console.log("left key is pressed");
+         context.fillRect(0,0,stage.width,stage.height);
+         BRAM_START_X = (BRAM_START_X - 10) // run that rectangle refresh function to keep the green from being refreshed
+         context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
+       }
+       else if (e.which === 38) {
+        //  console.log("up key is pressed");
+         context.fillRect(0,0,stage.width,stage.height);
+         BRAM_START_Y = (BRAM_START_Y - 10) // run that rectangle refresh function to keep the green from being refreshed
+         context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
+       }
+     })
     function keyDownHandler(event) {
     	var keyPressed = String.fromCharCode(event.keyCode);
     	// converts those obscure ASCII codes to string values
