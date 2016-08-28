@@ -6,7 +6,7 @@ in X amount of time -->
     <meta charset="utf-8">
     <title> Hold the D00R!</title>
 
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css" href="main.css">
 
@@ -17,12 +17,14 @@ in X amount of time -->
 </head>
   <body>
     <center><h1> H0LD THE D00R! </h1></center>
+      <div class="wrapper"><button type="button" class="btn btn-primary">Reset</button></div>
+      <!-- <label id="minutes">00</label>: -->
+      <label id="seconds">00</label>
 
-    <center>
-      <canvas id="board" width="800" height="800">
-        <img src="imgs/bramchar.png" width="300" height="200"></img>
-      </canvas>
-    </center>
+    <center><canvas id="board" width="800" height="800"></center>
+      <div style="display:none;">
+        <img id="finishLine" src="imgs/winpic.png">
+      </div>
 
     <script type="text/javascript" src="javascript/app.js"></script>
     <!-- <script type="text/javascript" src="javascript/keystrokes.js"></script> -->

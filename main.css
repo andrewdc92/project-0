@@ -6,3 +6,25 @@ navigating "freely" within it shouldn't be an issue
 -Create "tracks" in html for icons(players) to move across ->bootstrap? good here
 -First step forward in the pseudo- YES to bootstrap?
 -
+*/
+label {
+  border: solid 20px orange;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#minutes {
+  padding: 10px;
+  text-align: center;
+
+}
+#seconds {
+  padding: 10px;
+  text-align: center;
+}
+
+.wrapper {
+  text-align: center;
+  padding: 15px;
+}

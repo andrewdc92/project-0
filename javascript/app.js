@@ -30,6 +30,13 @@ var BRAM_WIDTH = 72,
   	CHAR_START_Y = 98,
   	IMG_WIDTH = 216;
 
+  var sec = 0;
+  function pad ( val ) { return val > 9 ? val : "0" + val; }
+  setInterval( function(){
+      document.getElementById("seconds").innerHTML=pad(++sec%60);
+      // document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+  }, 1000);
+
     var stage = document.getElementById('board');
     stage.width = STAGE_WIDTH;
     stage.height = STAGE_HEIGHT; // mess around with var. definitions in app.js
@@ -59,19 +66,23 @@ var BRAM_WIDTH = 72,
     // Bram's image is ready to go, only will hit true when img is loaded!
     function preloading () {
     	if (bramImage.ready) {
-    		clearInterval(preloader);
-
-    		facing = "E";
-    		isMoving = false;
-        // ameloop = setInterval(status, TIME_PER_FRAME);
-
 
         status();
-    		document.addEventListener("keydown",keyDownHandler, false); // when a key is pressed
-    		document.addEventListener("keyup",keyUpHandler, false); // when a key is released
     	}
     }
 
+    $('.btn').click(function() {
+      window.location.reload();
+    })
+
+    function declareWinner(x,y) {
+      if (BRAM_START_X >= 670 && BRAM_START_Y >= 475)
+        alert("You Won!");
+    }
+
+  //   if (BRAM_START_X === 670 && BRAM_START_Y === 500)
+  //     alert("You Won!");
+  // }
     // this gets the right arrow firing in console
     $(document).keydown(function(e) {
        if (e.which === 39) {
@@ -79,87 +90,52 @@ var BRAM_WIDTH = 72,
          context.fillRect(0,0,stage.width,stage.height);
          BRAM_START_X = (BRAM_START_X + 10) // run that rectangle refresh function to keep the green from being refreshed
          context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
+         declareWinner(BRAM_START_X, BRAM_START_Y);
        }
        else if (e.which === 40) {
         //  console.log("down key is pressed");
          context.fillRect(0,0,stage.width,stage.height);
          BRAM_START_Y = (BRAM_START_Y + 10) // run that rectangle refresh function to keep the green from being refreshed
          context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
+         declareWinner(BRAM_START_X, BRAM_START_Y);
        }
        else if (e.which === 37) {
         //  console.log("left key is pressed");
          context.fillRect(0,0,stage.width,stage.height);
          BRAM_START_X = (BRAM_START_X - 10) // run that rectangle refresh function to keep the green from being refreshed
          context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
+         declareWinner(BRAM_START_X, BRAM_START_Y);
        }
        else if (e.which === 38) {
         //  console.log("up key is pressed");
          context.fillRect(0,0,stage.width,stage.height);
          BRAM_START_Y = (BRAM_START_Y - 10) // run that rectangle refresh function to keep the green from being refreshed
          context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
+         declareWinner(BRAM_START_X, BRAM_START_Y);
        }
      })
-    function keyDownHandler(event) {
-    	var keyPressed = String.fromCharCode(event.keyCode);
-    	// converts those obscure ASCII codes to string values
-    	// WDSA is the equivalent of the compass directions
-    	if (keyPressed == "W")
-    	{
-    		facing = "N";
-    		isMoving = true;
-    	}
-    	else if (keyPressed == "D")
-    	{
-    		facing = "E";
-    		isMoving = true;
-    	}
-    	else if (keyPressed == "S")
-    	{
-    		facing = "S";
-    		isMoving = true;
-    	}
-    	else if (keyPressed == "A")
-    	{
-    		facing = "W";
-    		isMoving = true;
-    	}
-    }
 
-    function keyUpHandler(event) {
-    	var keyPressed = String.fromCharCode(event.keyCode);
-
-    	if ((keyPressed == "W") || (keyPressed == "A") ||
-    		(keyPressed == "S") || (keyPressed == "D"))
-    	{
-    		isMoving = false;
-    	}
-    }
-
-    // var counter = 0; // for initialization
 
     currX = CHAR_START_X;
     currY = CHAR_START_Y;
 
+    var winnerImage = document.getElementById("finishLine");
     // more definitions
     function status() {
     	context.fillStyle ="grey";
     	context.fillRect (0,0, stage.width, stage.height);
     	context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
-
-    	// currX += BRAM_WIDTH;
-    	// if (currX >= IMG_WIDTH) {
-    	// 				currX = 0;
-      // }
+      context.drawImage(winnerImage, 800, 500);
     }
 
 
 
-    // 	counter++;
-    // 	context.fillStyle = "#AAA"; // should be a lightish neutral color
-    // 	context.fillRect(0, 0, stage.width, stage.height);
-    // 	context.fillStyle = "white";
-    // 	context.fillText("Time allotted: "+counter, COUNTER_X, COUNTER_Y);
-    // }
+    	// counter++;
+    	// context.fillStyle = "#AAA"; // should be a lightish neutral color
+    	// context.fillRect(0, 0, stage.width, stage.height);
+    	// context.fillStyle = "white";
+    	// context.fillText("Time allotted: "+counter, COUNTER_X, COUNTER_Y);
+
     //
     //
     // function preloading()
@@ -184,23 +160,3 @@ var BRAM_WIDTH = 72,
 // var COUNTER_X = 100,
 //         COUNTER_Y = 100;
 // $(document).ready(function() {
-
-
-
-
-//  GAMEPLAN & Game LOGIC
-// -Goal of game- get icon/player sybmol from bottom left corner (door) to top right corner (gate)
-// in X amount of time
-// .
-//  directional goals
-// -NSEW movement, probably gonna use x/y grid coordinates to track movement
-//
-// a) form to input player name, select player after
-// b) can use either JPG/PNG imgs for player symbols or just html/class
-// c) want movement to be INITIATED by .keypress();
-//       -attach key press to document object, all i need is for players to alternate moving East
-//       -the event i want to intiate is moving right
-//
-// $('.btn').click(function() {
-//   $( '.box' ).empty();
-// })
