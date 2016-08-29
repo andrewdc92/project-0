@@ -3,6 +3,12 @@ in X amount of time -->
 
 <html>
   <head>
+
+    <script src="https://cdn.rawgit.com/t4t5/sweetalert/master/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/t4t5/sweetalert/master/dist/sweetalert.css">  
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+
     <meta charset="utf-8">
     <title> Hold the D00R!</title>
 
@@ -17,13 +23,16 @@ in X amount of time -->
 </head>
   <body>
     <center><h1> H0LD THE D00R! </h1></center>
-      <div class="wrapper"><button type="button" class="btn btn-primary">Reset</button></div>
+      <div class="wrapper"><button type="button" class="btn btn-warning">Reset</button></div>
+      <p>Winter is coming! Get Bran and his comrades to the fairy as fast as you can!
+      Use the arrow keys to navigate across the frozen tundra. </p>
       <!-- <label id="minutes">00</label>: -->
       <label id="seconds">00</label>
 
     <center><canvas id="board" width="800" height="800"></center>
       <div style="display:none;">
         <img id="finishLine" src="imgs/winpic.png">
+        <img id="monster1"   src="imgs/whitewalker.png">
       </div>
 
     <script type="text/javascript" src="javascript/app.js"></script>

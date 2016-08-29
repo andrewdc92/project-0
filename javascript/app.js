@@ -1,11 +1,3 @@
-// comment out any code that I'm not using/broken code
-// move all of that code below working code
-// structure file so all vars on on top, followed by all of function defs, and then the calls below
-// check indentations.
-
-//part two- get the downclick handler going, downarrow to change y axis
-// declare winner (if x = 900 declare winner etc), after each move check for winner like in tictactoe
-// if BRAM_START_X = 900, display "alert"on.event
 
 console.log('javascript works');
 //canvas attributes/values
@@ -30,23 +22,21 @@ var BRAM_WIDTH = 72,
   	CHAR_START_Y = 98,
   	IMG_WIDTH = 216;
 
-  var sec = 0;
-  function pad ( val ) { return val > 9 ? val : "0" + val; }
-  setInterval( function(){
-      document.getElementById("seconds").innerHTML=pad(++sec%60);
-      // document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
-  }, 1000);
+var sec = 0;
+    function pad ( val ) { return val > 9 ? val : "0" + val; }
+    setInterval(function(){
+        document.getElementById("seconds").innerHTML=pad(++sec%60);
+        // document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+    }, 1000);
 
     var stage = document.getElementById('board');
     stage.width = STAGE_WIDTH;
     stage.height = STAGE_HEIGHT; // mess around with var. definitions in app.js
     														// to get canvas to the right proportions
     var context = stage.getContext("2d");
-    context.fillStyle = "grey";
+    context.fillStyle = "white";
     context.font = GAME_FONTS;
 
-    // before loop kicks in, gotta do the equivalent of the $document.ready function
-    // so the imgs can load
     var bramImage = new Image(); // got ONE piece of OOP in here! creates object for Image
     bramImage.ready = false;
     bramImage.onload = setReady; // when Bram(img) is loaded, setReady function fires
@@ -71,19 +61,25 @@ var BRAM_WIDTH = 72,
     	}
     }
 
-    $('.btn').click(function() {
+      $('.btn').click(function() {
       window.location.reload();
-    })
+      })
 
+    // declare winner function based off x/y coordinates
     function declareWinner(x,y) {
       if (BRAM_START_X >= 670 && BRAM_START_Y >= 475)
-        alert("You Won!");
+        sweetAlert("You Won! Hit Reset to Play Again.");
     }
 
-  //   if (BRAM_START_X === 670 && BRAM_START_Y === 500)
-  //     alert("You Won!");
-  // }
-    // this gets the right arrow firing in console
+    // function youLose (x,y) {
+    //     if (BRAM_START_X >= 280 && BRAM_START_Y >= 300)
+    //     alert("You Lose!")
+    //   // if (BRAM_START_X == 300 && BRAM_START_Y == 300)
+    //   // alert("You Lose!")
+    //   // else if (BRAM_START_X == 500 && BRAM_START_Y == 500)
+    //   // alert("You Lose!")
+    // }
+    // sets the reset each time character moves and calls winner function in all directions
     $(document).keydown(function(e) {
        if (e.which === 39) {
          console.log("Right key is pressed");
@@ -91,6 +87,7 @@ var BRAM_WIDTH = 72,
          BRAM_START_X = (BRAM_START_X + 10) // run that rectangle refresh function to keep the green from being refreshed
          context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
          declareWinner(BRAM_START_X, BRAM_START_Y);
+         youLose(BRAM_START_X, BRAM_START_Y);
        }
        else if (e.which === 40) {
         //  console.log("down key is pressed");
@@ -98,6 +95,7 @@ var BRAM_WIDTH = 72,
          BRAM_START_Y = (BRAM_START_Y + 10) // run that rectangle refresh function to keep the green from being refreshed
          context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
          declareWinner(BRAM_START_X, BRAM_START_Y);
+         youLose(BRAM_START_X, BRAM_START_Y);
        }
        else if (e.which === 37) {
         //  console.log("left key is pressed");
@@ -105,6 +103,7 @@ var BRAM_WIDTH = 72,
          BRAM_START_X = (BRAM_START_X - 10) // run that rectangle refresh function to keep the green from being refreshed
          context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
          declareWinner(BRAM_START_X, BRAM_START_Y);
+         youLose(BRAM_START_X, BRAM_START_Y);
        }
        else if (e.which === 38) {
         //  console.log("up key is pressed");
@@ -112,51 +111,32 @@ var BRAM_WIDTH = 72,
          BRAM_START_Y = (BRAM_START_Y - 10) // run that rectangle refresh function to keep the green from being refreshed
          context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
          declareWinner(BRAM_START_X, BRAM_START_Y);
+         youLose(BRAM_START_X, BRAM_START_Y);
        }
      })
 
 
     currX = CHAR_START_X;
     currY = CHAR_START_Y;
-
+    var monster1 = document.getElementById("monster1");
     var winnerImage = document.getElementById("finishLine");
     // more definitions
     function status() {
-    	context.fillStyle ="grey";
+    	context.fillStyle ="white";
     	context.fillRect (0,0, stage.width, stage.height);
     	context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
       context.drawImage(winnerImage, 800, 500);
+      context.drawImage(monster1, 300, 300);
+      context.drawImage(monster1, 500, 500);
+      context.drawImage(monster1, 500, 100);
     }
 
-
-
-    	// counter++;
-    	// context.fillStyle = "#AAA"; // should be a lightish neutral color
-    	// context.fillRect(0, 0, stage.width, stage.height);
-    	// context.fillStyle = "white";
-    	// context.fillText("Time allotted: "+counter, COUNTER_X, COUNTER_Y);
-
-    //
-    //
-    // function preloading()
-    // {
-    // 	if (bramImage.ready)
-    // 	{
-    // 		clearInterval(preloader);
-    //
-    // 		//game initiation
-    // 		facing = "East"; //N = North, E = East, S = South, W = West
-    // 		isMoving = false;
-    //
-    // 		gameloop = setInterval(update, TIME_PER_FRAME);
-    // 		document.addEventListener("keydown",keyDownHandler, false); // when a key is pressed
-    // 		document.addEventListener("keyup",keyUpHandler, false); // when a key is released
-    // 		// could use jquery, but since referencing whole document probably not going to use it
-    // 	}
+    // function youLose (x,y) {
+    //   if (BRAM_START_X == 300 && BRAM_START_Y == 300)
+    //   alert("You Lose!")
     // }
     //
-    //
-
-// var COUNTER_X = 100,
-//         COUNTER_Y = 100;
-// $(document).ready(function() {
+    // function declareWinner(x,y) {
+    //   if (BRAM_START_X >= 670 && BRAM_START_Y >= 475)
+    //     alert("You Won! Hit Reset to Play Again.");
+    // }

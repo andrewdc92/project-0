@@ -14,6 +14,23 @@ label {
   left: 0;
 }
 
+#board {
+  opacity: .8;
+}
+
+
+h1 {
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+}
+body {
+background-image: url(https://cdn1.vox-cdn.com/thumbor/rklXRkdv5LCgrLrPCvkhhNrUyyA=/cdn0.vox-cdn.com/uploads/chorus_asset/file/6530083/hodor-death.0.jpg);
+}
+p{
+  text-align: center;
+  color: white;
+}
+
 #minutes {
   padding: 10px;
   text-align: center;
@@ -22,6 +39,7 @@ label {
 #seconds {
   padding: 10px;
   text-align: center;
+  color: white;
 }
 
 .wrapper {
