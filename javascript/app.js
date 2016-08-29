@@ -22,6 +22,7 @@ var BRAM_WIDTH = 72,
   	CHAR_START_Y = 98,
   	IMG_WIDTH = 216;
 
+// timer set up
 var sec = 0;
     function pad ( val ) { return val > 9 ? val : "0" + val; }
     setInterval(function(){
@@ -50,11 +51,11 @@ var sec = 0;
     context.fillRect(0,0,stage.width,stage.height); // this overlays grey rectangle starting from 0,0 x/y
     context.fillText(TEXT_PRELOADING, TEXT_PRELOADING_X, TEXT_PRELOADING_Y);
     var preloader = setInterval(preloading, TIME_PER_FRAME);
-    var gameloop, charX, charY, isMoving, currX, currY, facing; // refers to canvas x/y coordinates
+    var charX, charY, isMoving, currX, currY; // refers to canvas x/y coordinates
 
     // this function also runs at the rate of TIME_PER_FRAME, keeps checking if
     // Bram's image is ready to go, only will hit true when img is loaded!
-    function preloading () {
+    function preloading() {
     	if (bramImage.ready) {
 
         status();
@@ -73,11 +74,11 @@ var sec = 0;
 
     // function youLose (x,y) {
     //     if (BRAM_START_X >= 280 && BRAM_START_Y >= 300)
-    //     alert("You Lose!")
-    //   // if (BRAM_START_X == 300 && BRAM_START_Y == 300)
-    //   // alert("You Lose!")
-    //   // else if (BRAM_START_X == 500 && BRAM_START_Y == 500)
-    //   // alert("You Lose!")
+    //       alert("You Lose!")
+    //         if (BRAM_START_X == 300 && BRAM_START_Y == 300)
+    //           alert("You Lose!")
+    //             else if (BRAM_START_X == 500 && BRAM_START_Y == 500)
+    //               alert("You Lose!")
     // }
     // sets the reset each time character moves and calls winner function in all directions
     $(document).keydown(function(e) {
@@ -130,13 +131,3 @@ var sec = 0;
       context.drawImage(monster1, 500, 500);
       context.drawImage(monster1, 500, 100);
     }
-
-    // function youLose (x,y) {
-    //   if (BRAM_START_X == 300 && BRAM_START_Y == 300)
-    //   alert("You Lose!")
-    // }
-    //
-    // function declareWinner(x,y) {
-    //   if (BRAM_START_X >= 670 && BRAM_START_Y >= 475)
-    //     alert("You Won! Hit Reset to Play Again.");
-    // }

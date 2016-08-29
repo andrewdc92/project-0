@@ -1,42 +1,87 @@
-![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
+Andrew Cordivari
+github.com/andrewdc92
+public link to game : http://adcproject0.bitballoon.com/
 
-# Project 0: The Game
 
-**Read this entire document before writing a line of code.**
+### Project 0: The Game ("HOLD THE DOOR!")
+
+The objective of the game was to get the 3 characters from one side of the screen to the other as fast as possible. Once I achieved linear motion, I build out multi-directional functionality and declared the winner based upon reaching a specified range of x & y coordinates. The inspiration of the game comes from the end of Game of Thrones Season 6 where Bran is unconscious while the whitewalkers encroach and desperate measures are taken to ensure his safety (no spoilers!). 
+
 
 ### Overview
+The first interesting element of the game design was learning about the <canvas> element, which is really an API by it's broad functionality. Perhaps to maximize the array of features at this particular stage in the unit, I should have utilized something more familiar like a board id, but it was fun and challenging to learn and adapt. There were certain concepts that I had trouble applying to the canvas that might have been easier on a regular <div> element or something similiar. I ultimately chose to use canvas after researching an conceptual game design strategies, as it was utilized in dozens of examples. 
 
-Let's start out with something fun - **a game!**
+### TECHNOLOGIES USED
 
-![](https://media.giphy.com/media/u0vk7qdooz5Cg/giphy.gif)
+----SweetAlert so I could use those obnoxious alert triggers in JS but make it more enjoyable and cohesive to the user expereince.
+----jQuery for a few general document selectors. 
 
-Everyone will get a chance to **be creative**, and work through some really **tough programming challenges** – since you've already gotten your feet wet with Tic Tac Toe and a Memory game, it's your turn to plan and implement a game from scratch.
-
-**You will be working individually for this project**, but we'll be guiding you as you get started. Show us what you've got!
-
-
----
-
-### Timeline
-
-* **Assigned:** Friday, August 26th
-* **Due:** Monday, August 29th at 9:00AM
+----Mostly javascript, as at least for now I didn't mind the longer yet more imperative version of Javascript syntax over jQuery. For example, I was referencing so many different variables that  using statements like 'getElementById provided extra semantic definition to make things clear for me. 
 
 
----
+---Bootstrap for the Reset button and to style the timer font
 
-### Essential Skills
 
-By the time you submit this project, you will have leveled up in many big themes in the course:
+---Mostly mentioned above, but uisng the context selector to add animations and "draw" images on the canvas api was cool.
 
-* **Terminal**: Practice interacting with the computer and navigating the file-system from the Command Line.
-* **Git**: Manage and interact with a git repository to store changes to code.
-* **JavaScript Fundamentals**: Work with objects and events, while strategically solving problems and resolving errors.
-* **Front-End**: Work on HTML structure, CSS styles, and perhaps even animating elements within a browser. Respond to actions your users take and the data they input into the browser.
-* **Documentation**: Document your code and your GitHub repository so others understand what you've built.
+---I googled 8bit online images and converters to make and download the character image files.
+
+
+---Got one bit of OOP in here I believe...didn't really go into it like we did in class examples, ie no prototype methods were implemented.
+
+var bramImage = new Image(); // got ONE piece of OOP in here! creates object for Image
+bramImage.ready = false;
+bramImage.onload = setReady; // when Bram(img) is loaded, setReady function fires
+bramImage.src = PATH_BRAM;
 
 ---
 
+### APPROACH
+I defined most of the variables initially in a seperate JS file, and then combined them at the end.
+
+var BRAM_WIDTH = 72,
+BRAM_HEIGHT = 96,
+BRAM_START_X = 000,
+BRAM_START_Y = 000,
+CHAR_START_X = 0,
+CHAR_START_Y = 98,
+IMG_WIDTH = 216;
+
+Most of the setup involved setting the dimensions of the 2d canvas and learning/exploring the XY coordinate system. I set the movements based off the ASCII codes and the keyDown event listener as follow: 
+
+$(document).keydown(function(e) {
+if (e.which === 39) {
+console.log("Right key is pressed");
+context.fillRect(0,0,stage.width,stage.height);
+BRAM_START_X = (BRAM_START_X + 10) // run that rectangle refresh function to keep the green from being refreshed
+context.drawImage(bramImage,currX,currY,BRAM_WIDTH,BRAM_HEIGHT,BRAM_START_X,BRAM_START_Y,BRAM_WIDTH*2,BRAM_HEIGHT*2);
+declareWinner(BRAM_START_X, BRAM_START_Y);
+youLose(BRAM_START_X, BRAM_START_Y);
+}
+else if (e.which === 40) {.....ETC 
+
+The context.fillRect function served as a reset to the canvas every time the image moved.
+
+I believe that if I had used a container or div element instead of canvas, setting up collision detection would have been a bit easier, as I could reference tangible ids and classes instead of the drawn animations that were already influeced by a handful of variables. It was looking quite laborous involving trial and error to set collision detection based off specicic X and Y coordinates, and even doing boolean ranges was tough without knowing exactly where the X and Y axis values fell within the canvas. 
+
+The function I initally created that set off "You LOSE" if you bumped into a whitewalker looked like this: 
+
+function youLose (x,y) {
+if (BRAM_START_X >= 280 && BRAM_START_Y >= 300)
+alert("You Lose!")
+if (BRAM_START_X == 300 && BRAM_START_Y == 300)
+alert("You Lose!")
+else if (BRAM_START_X == 500 && BRAM_START_Y == 500)
+alert("You Lose!")
+
+
+### WHAT I WOULD HAVE DONE DIFFERENTLY/WILL IMPLEMENT IN THE FUTURE
+
+-set an initiating countdown that triggers the clock to start only when the user makes the first move (admittedly the function I used to generate the clock seemed a bit wonky, but it was easy to get it in the position I wanted to I kept it.) 
+-Set collion detection for all 3 of the white walkers
+-Make sure the "winning" event is tied to the reset button so the user doesn't need to press reset automatically
+
+- Although I know alerts are not good practice, I must say I thought the plugin I found to stylize the alerts looks pretty good :) 
 ### Technical Requirements
 
 Your app must:
